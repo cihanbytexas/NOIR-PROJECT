@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NOIR | Secure Network</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <button class="menu-btn" aria-label="Menü">☰</button>
+            <div class="logo">NOIR</div>
+        </div>
+        <div class="lang-toggle">TR / EN</div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <button class="btn btn-dark" id="loginBtn">Giriş Yap</button>
+            <button class="btn btn-outline" id="registerBtn">Kayıt Ol</button>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-title">Online</div>
+                <div class="stat-value">
+                    <div class="online-dot"></div> 
+                    <span id="onlineCount">1,402</span>
+                </div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title">All User</div>
+                <div class="stat-value" id="totalCount">8,930</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // İleride oluşturacağımız app.js dosyasına taşınacak temel tetikleyiciler
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            console.log("Güvenli Giriş Protokolü Başlatılıyor...");
+        });
+
+        document.getElementById('registerBtn').addEventListener('click', () => {
+            console.log("Yeni Kullanıcı Kayıt Protokolü Başlatılıyor...");
+        });
+    </script>
+</body>
+</html>
