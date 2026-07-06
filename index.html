@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NOIR | Secure Network</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -15,55 +14,63 @@
                 <button class="menu-btn" aria-label="Menü">☰</button>
                 <div class="logo">NOIR</div>
             </div>
-            <div class="lang-toggle">TR / EN</div>
+            <!-- Dil Değiştirme Butonu -->
+            <div class="lang-toggle" id="langToggleBtn">TR / EN</div>
         </header>
 
         <main>
             <div class="auth-container">
-                <button class="btn btn-dark" id="openLoginBtn">Giriş Yap</button>
-                <button class="btn btn-outline" id="openRegisterBtn">Kayıt Ol</button>
+                <!-- Tek Merkezli Bağlantı Butonu -->
+                <button class="btn btn-dark" id="openAuthBtn" data-i18n="main_btn">GİRİŞ / KAYIT</button>
             </div>
 
             <div class="stats-container">
                 <div class="stat-box">
-                    <div class="stat-title">Online</div>
+                    <div class="stat-title" data-i18n="online_title">ONLİNE</div>
                     <div class="stat-value">
                         <div class="online-dot"></div> 
                         <span id="onlineCount">...</span>
                     </div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-title">All User</div>
+                    <div class="stat-title" data-i18n="total_title">ALL USER</div>
                     <div class="stat-value" id="totalCount">...</div>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Alttan Açılan Gelişmiş Panel -->
     <div id="authSheet" class="sheet-overlay">
         <div class="sheet-content">
             <div class="sheet-handle" id="closeSheetBtn"></div>
             
+            <!-- Sekmeler (Tabs) -->
+            <div class="auth-tabs">
+                <button class="tab-btn active" id="tabLoginBtn" data-i18n="tab_login">Giriş Yap</button>
+                <button class="tab-btn" id="tabRegisterBtn" data-i18n="tab_register">Kayıt Ol</button>
+            </div>
+
+            <!-- Giriş Formu -->
             <form id="loginForm" class="form-wrapper">
-                <h2 class="form-title">GİRİŞ PROTOKOLÜ</h2>
                 <div class="input-group">
-                    <input type="text" id="loginUsername" placeholder="Kullanıcı Adı" autocomplete="off" required>
+                    <input type="text" id="loginUsername" placeholder="Kullanıcı Adı" data-i18n-ph="ph_username" autocomplete="off" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="loginPassword" placeholder="Şifre" required>
+                    <input type="password" id="loginPassword" placeholder="Şifre" data-i18n-ph="ph_password" required>
                 </div>
-                <button type="submit" class="btn btn-dark form-submit">Sisteme Bağlan</button>
+                <button type="submit" class="btn btn-dark form-submit" data-i18n="btn_connect">Sisteme Bağlan</button>
             </form>
 
+            <!-- Kayıt Formu (Başlangıçta Gizli) -->
             <form id="registerForm" class="form-wrapper hidden">
-                <h2 class="form-title">YENİ KAYIT</h2>
                 <div class="input-group">
-                    <input type="text" id="registerUsername" placeholder="Benzersiz Kullanıcı Adı" autocomplete="off" required>
+                    <input type="text" id="registerUsername" placeholder="Benzersiz Kullanıcı Adı" data-i18n-ph="ph_unique_user" autocomplete="off" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="registerPassword" placeholder="Şifre Oluştur" required>
+                    <input type="password" id="registerPassword" placeholder="Şifre Oluştur" data-i18n-ph="ph_create_pass" required>
                 </div>
-                <button type="submit" class="btn btn-dark form-submit">Hesap Oluştur</button>
+                <button type="submit" class="btn btn-dark form-submit" data-i18n="btn_create">Hesap Oluştur</button>
             </form>
         </div>
     </div>
