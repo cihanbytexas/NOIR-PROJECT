@@ -8,44 +8,91 @@
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <button class="menu-btn" aria-label="Menü">☰</button>
-            <div class="logo">NOIR</div>
-        </div>
-        <div class="lang-toggle">TR / EN</div>
-    </header>
+    <div id="appContainer">
+        <header>
+            <div class="logo-container">
+                <button class="menu-btn" aria-label="Menü">☰</button>
+                <div class="logo">NOIR</div>
+            </div>
+            <div class="lang-toggle">TR / EN</div>
+        </header>
 
-    <main>
-        <div class="auth-container">
-            <button class="btn btn-dark" id="loginBtn">Giriş Yap</button>
-            <button class="btn btn-outline" id="registerBtn">Kayıt Ol</button>
-        </div>
+        <main>
+            <div class="auth-container">
+                <button class="btn btn-dark" id="openLoginBtn">Giriş Yap</button>
+                <button class="btn btn-outline" id="openRegisterBtn">Kayıt Ol</button>
+            </div>
 
-        <div class="stats-container">
-            <div class="stat-box">
-                <div class="stat-title">Online</div>
-                <div class="stat-value">
-                    <div class="online-dot"></div> 
-                    <span id="onlineCount">1,402</span>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-title">Online</div>
+                    <div class="stat-value">
+                        <div class="online-dot"></div> 
+                        <span id="onlineCount" class="skeleton-text">...</span>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-title">All User</div>
+                    <div class="stat-value" id="totalCount" class="skeleton-text">...</div>
                 </div>
             </div>
-            <div class="stat-box">
-                <div class="stat-title">All User</div>
-                <div class="stat-value" id="totalCount">8,930</div>
+        </main>
+    </div>
+
+    <div id="authSheet" class="sheet-overlay">
+        <div class="sheet-content">
+            <div class="sheet-handle" id="closeSheetBtn"></div>
+            
+            <div id="loginForm" class="form-wrapper">
+                <h2 class="form-title">GİRİŞ PROTOKOLÜ</h2>
+                <div class="input-group">
+                    <input type="text" placeholder="Kullanıcı Adı" autocomplete="off" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Şifre" required>
+                </div>
+                <button class="btn btn-dark form-submit">Sisteme Bağlan</button>
+            </div>
+
+            <div id="registerForm" class="form-wrapper hidden">
+                <h2 class="form-title">YENİ KAYIT</h2>
+                <div class="input-group">
+                    <input type="text" placeholder="Benzersiz Kullanıcı Adı" autocomplete="off" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Şifre Oluştur" required>
+                </div>
+                <button class="btn btn-dark form-submit">Hesap Oluştur</button>
             </div>
         </div>
-    </main>
+    </div>
 
     <script>
-        // İleride oluşturacağımız app.js dosyasına taşınacak temel tetikleyiciler
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            console.log("Güvenli Giriş Protokolü Başlatılıyor...");
+        const authSheet = document.getElementById('authSheet');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        document.getElementById('openLoginBtn').addEventListener('click', () => {
+            authSheet.classList.add('active');
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
         });
 
-        document.getElementById('registerBtn').addEventListener('click', () => {
-            console.log("Yeni Kullanıcı Kayıt Protokolü Başlatılıyor...");
+        document.getElementById('openRegisterBtn').addEventListener('click', () => {
+            authSheet.classList.add('active');
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
         });
+
+        document.getElementById('closeSheetBtn').addEventListener('click', () => {
+            authSheet.classList.remove('active');
+        });
+
+        // Simüle edilmiş ilk veri yüklemesi (Supabase entegre edilince gerçek zamanlı akacak)
+        setTimeout(() => {
+            document.getElementById('onlineCount').innerText = "1,402";
+            document.getElementById('totalCount').innerText = "8,930";
+        }, 600);
     </script>
 </body>
 </html>
