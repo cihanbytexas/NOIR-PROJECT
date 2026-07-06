@@ -1,30 +1,36 @@
-/* CSS Reset ve Temel Değişkenler */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --gray-light: #f5f5f5;
     --gray-dark: #888888;
-    --online-color: #000000; /* Minimalizm için siyah nabız */
+    --online-color: #000000;
+    --sheet-bg: #ffffff;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow: hidden; /* Kaydırmayı engeller, web-app hissiyatı verir */
+    min-height: 100dvh; /* Mobil tarayıcılar için dinamik viewport tam uyum */
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
 }
 
-/* Üst Menü (Header) */
+#appContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -42,7 +48,6 @@ header {
     background: none;
     border: none;
     font-size: 24px;
-    font-weight: 300;
     cursor: pointer;
     color: var(--text-color);
 }
@@ -61,7 +66,6 @@ header {
     letter-spacing: 1px;
 }
 
-/* Ana İçerik Alanı */
 main {
     flex: 1;
     display: flex;
@@ -69,10 +73,8 @@ main {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 100%;
 }
 
-/* Aksiyon Butonları */
 .auth-container {
     display: flex;
     flex-direction: column;
@@ -85,14 +87,14 @@ main {
 .btn {
     width: 100%;
     padding: 18px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 0px; /* Profesyonel keskin köşeler */
+    border-radius: 0px;
 }
 
 .btn-dark {
@@ -101,28 +103,16 @@ main {
     border: 2px solid var(--text-color);
 }
 
-.btn-dark:hover {
-    background-color: transparent;
-    color: var(--text-color);
-}
-
 .btn-outline {
     background-color: transparent;
     color: var(--text-color);
     border: 2px solid var(--text-color);
 }
 
-.btn-outline:hover {
-    background-color: var(--text-color);
-    color: var(--bg-color);
-}
-
-/* Canlı İstatistik Alanı */
 .stats-container {
     display: flex;
     justify-content: center;
     gap: 50px;
-    text-align: center;
 }
 
 .stat-box {
@@ -140,7 +130,7 @@ main {
 }
 
 .stat-value {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 900;
     letter-spacing: -1px;
     display: flex;
@@ -149,10 +139,13 @@ main {
     gap: 12px;
 }
 
-/* Nabız Efektli Online Göstergesi */
+.skeleton-text {
+    color: var(--gray-light);
+}
+
 .online-dot {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background-color: var(--online-color);
     border-radius: 50%;
     animation: pulse 2s infinite;
@@ -160,6 +153,86 @@ main {
 
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); }
+    70% { box-shadow: 0 0 0 12px rgba(0, 0, 0, 0); }
     100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+}
+
+/* Alttan Açılan Form Paneli (Bottom Sheet CSS Mimarisi) */
+.sheet-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+    transition: background-color 0.4s ease;
+    z-index: 100;
+}
+
+.sheet-overlay.active {
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+}
+
+.sheet-content {
+    width: 100%;
+    background-color: var(--sheet-bg);
+    padding: 30px;
+    border-top: 1px solid #e5e5e5;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sheet-overlay.active .sheet-content {
+    transform: translateY(0);
+}
+
+.sheet-handle {
+    width: 40px;
+    height: 5px;
+    background-color: #e5e5e5;
+    border-radius: 3px;
+    margin: 0 auto 30px auto;
+    cursor: pointer;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.form-wrapper.hidden {
+    display: none;
+}
+
+.form-title {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    background-color: var(--gray-light);
+    font-size: 15px;
+    outline: none;
+    font-weight: 600;
+}
+
+.input-group input:focus {
+    border-color: var(--text-color);
+}
+
+.form-submit {
+    margin-top: 10px;
 }
