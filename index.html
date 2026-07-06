@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NOIR | Secure Network</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -28,12 +29,12 @@
                     <div class="stat-title">Online</div>
                     <div class="stat-value">
                         <div class="online-dot"></div> 
-                        <span id="onlineCount" class="skeleton-text">...</span>
+                        <span id="onlineCount">...</span>
                     </div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-title">All User</div>
-                    <div class="stat-value" id="totalCount" class="skeleton-text">...</div>
+                    <div class="stat-value" id="totalCount">...</div>
                 </div>
             </div>
         </main>
@@ -43,56 +44,30 @@
         <div class="sheet-content">
             <div class="sheet-handle" id="closeSheetBtn"></div>
             
-            <div id="loginForm" class="form-wrapper">
+            <form id="loginForm" class="form-wrapper">
                 <h2 class="form-title">GİRİŞ PROTOKOLÜ</h2>
                 <div class="input-group">
-                    <input type="text" placeholder="Kullanıcı Adı" autocomplete="off" required>
+                    <input type="text" id="loginUsername" placeholder="Kullanıcı Adı" autocomplete="off" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" placeholder="Şifre" required>
+                    <input type="password" id="loginPassword" placeholder="Şifre" required>
                 </div>
-                <button class="btn btn-dark form-submit">Sisteme Bağlan</button>
-            </div>
+                <button type="submit" class="btn btn-dark form-submit">Sisteme Bağlan</button>
+            </form>
 
-            <div id="registerForm" class="form-wrapper hidden">
+            <form id="registerForm" class="form-wrapper hidden">
                 <h2 class="form-title">YENİ KAYIT</h2>
                 <div class="input-group">
-                    <input type="text" placeholder="Benzersiz Kullanıcı Adı" autocomplete="off" required>
+                    <input type="text" id="registerUsername" placeholder="Benzersiz Kullanıcı Adı" autocomplete="off" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" placeholder="Şifre Oluştur" required>
+                    <input type="password" id="registerPassword" placeholder="Şifre Oluştur" required>
                 </div>
-                <button class="btn btn-dark form-submit">Hesap Oluştur</button>
-            </div>
+                <button type="submit" class="btn btn-dark form-submit">Hesap Oluştur</button>
+            </form>
         </div>
     </div>
 
-    <script>
-        const authSheet = document.getElementById('authSheet');
-        const loginForm = document.getElementById('loginForm');
-        const registerForm = document.getElementById('registerForm');
-
-        document.getElementById('openLoginBtn').addEventListener('click', () => {
-            authSheet.classList.add('active');
-            loginForm.classList.remove('hidden');
-            registerForm.classList.add('hidden');
-        });
-
-        document.getElementById('openRegisterBtn').addEventListener('click', () => {
-            authSheet.classList.add('active');
-            loginForm.classList.add('hidden');
-            registerForm.classList.remove('hidden');
-        });
-
-        document.getElementById('closeSheetBtn').addEventListener('click', () => {
-            authSheet.classList.remove('active');
-        });
-
-        // Simüle edilmiş ilk veri yüklemesi (Supabase entegre edilince gerçek zamanlı akacak)
-        setTimeout(() => {
-            document.getElementById('onlineCount').innerText = "1,402";
-            document.getElementById('totalCount').innerText = "8,930";
-        }, 600);
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
